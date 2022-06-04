@@ -26,20 +26,23 @@ mongoose.connect(DB, {
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-app.post('/Contact', function(req,res){
+var contactSchema=mongoose.Schema({
+    fullname: String,
+    phone:Number,
+    email:String,
+    msg:String
+});
+var info=mongoose.model('info', contactSchema);
+
+app.options('/Contact', cors())
+
+app.post('/Contact',cors(), function(req,res){
     var fullname=req.body.fullname;
     var phone=req.body.phone;
     var email=req.body.email;
     var msg=req.body.msg;
 
-    var contactSchema=mongoose.Schema({
-        fullname: String,
-        phone:Number,
-        email:String,
-        msg:String
-    });
-
-    var info=mongoose.model('info', contactSchema);
+    
     var document1=new info({fullname:fullname, phone:phone, email:email, msg:msg});
     document1.save(function(err,data){
         if(err){
