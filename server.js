@@ -6,7 +6,7 @@ const cors=require('cors');
 const bodyParser=require('body-parser');
 const mongoose=require("mongoose");
 
-const hostname = 'localhost';
+const hostname = '0.0.0.0';
 // const port = 3001;
 const port= process.env.PORT || 3001;
 app.use(cors());
